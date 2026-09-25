@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>PaaS Tính Thể Tích Công Trường</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <header>📐 KHỐI LƯỢNG LƯỚI TRẮC ĐỊA</header>
+        
+        <!-- BỀ MẶT 1 -->
+        <div class="card">
+            <h3>📍 Bề mặt 1 (Mặt cơ sở)</h3>
+            <select id="bm1_mode" onchange="toggleMode('bm1')">
+                <option value="file">📂 Tải file địa hình (TXT)</option>
+                <option value="fixed">🔲 Mặt phẳng phẳng (Nhập cao độ)</option>
+            </select>
+            <input type="file" id="file_bm1" accept=".txt">
+            <input type="number" id="fixed_bm1" class="hidden" placeholder="Nhập cao độ cơ sở (m)">
+            <div id="preview_bm1" class="preview-box hidden"></div>
+        </div>
+
+        <!-- BỀ MẶT 2 -->
+        <div class="card">
+            <h3>🏗️ Bề mặt 2 (Mặt thiết kế/hoàn thành)</h3>
+            <select id="bm2_mode" onchange="toggleMode('bm2')">
+                <option value="file">📂 Tải file thiết kế (TXT)</option>
+                <option value="fixed">🔲 Mặt phẳng phẳng (Nhập cao độ)</option>
+            </select>
+            <input type="file" id="file_bm2" accept=".txt">
+            <input type="number" id="fixed_bm2" class="hidden" placeholder="Nhập cao độ hoàn thành (m)">
+            <div id="preview_bm2" class="preview-box hidden"></div>
+        </div>
+
+        <!-- CẤU HÌNH LƯỚI -->
+        <div class="card">
+            <h3>⚙️ Kích thước ô lưới (mét)</h3>
+            <input type="number" id="grid_size" value="5" placeholder="Ví dụ: 5">
+        </div>
+
+        <button id="btn_calc" onclick="runCalculation()">⚡ TÍNH KHỐI LƯỢNG</button>
+
+        <!-- KẾT QUẢ -->
+        <div id="result_card" class="card hidden">
+            <h3>📊 KẾT QUẢ TÍNH TOÁN</h3>
+            <div class="grid-res">
+                <div>Đào (Cut): <strong id="res_cut" class="text-red">0</strong> m³</div>
+                <div>Đắp (Fill): <strong id="res_fill" class="text-green">0</strong> m³</div>
+                <div>Cân bằng: <strong id="res_net">0</strong> m³</div>
+                <div>Số ô lưới: <span id="res_cells">0</span></div>
+            </div>
+            <div class="download-group">
+                <button onclick="downloadFile('excel')" class="btn-down">📥 Tải Excel (.xlsx)</button>
+                <button onclick="downloadFile('dxf')" class="btn-down">📥 Tải Bản vẽ CAD (.dxf)</button>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
